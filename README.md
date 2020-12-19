@@ -1,4 +1,5 @@
-#Tempusopen records
+# Tempusopen records
+
 A simple scraper to get times of swimmers out of [tempusopen.fi](tempusopen.fi)
 
     pipenv install
