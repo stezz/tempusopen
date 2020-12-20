@@ -6,7 +6,24 @@
 import scrapy
 
 
-class TempusopenItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
-    pass
+class Swimmer(scrapy.Item):
+    name = scrapy.Field()
+    id = scrapy.Field()
+    born = scrapy.Field()
+    team = scrapy.Field()
+    status = scrapy.Field()
+    license = scrapy.Field()
+    styles = scrapy.Field()
+
+class Style(scrapy.Item):
+    name = scrapy.Field()
+    #length = scrapy.Field()
+    times = scrapy.Field()
+    #swimmer = scrapy.Field()
+
+class Time(scrapy.Item):
+    date = scrapy.Field()
+    time = scrapy.Field()
+    competition = scrapy.Field()
+    #style = scrapy.Field()
+    #swimmer = scrapy.Field()
