@@ -1,8 +1,6 @@
 import scrapy
 from tempusopen.settings import swimmers
 from tempusopen.items import Swimmer, Time, Style
-from scrapy.loader import ItemLoader
-import logging
 
 
 class BaseUrl(scrapy.Item):
@@ -72,17 +70,15 @@ class RecordsSpider(scrapy.Spider):
         # We create the Style item that will collect all the times...
         style = Style()
         try:
-            # TODO Maybe we could use a defaultdict here
             swimmer['styles']
-        except:
+        except KeyError:
             swimmer['styles'] = []
         distance = response.xpath('//div[@class="container main"]//p/text()').extract_first()
         distance = distance.strip().split('\n')[1]
         style['name'] = distance
         try:
-            # TODO Maybe we could use a defaultdict here
             style['times']
-        except:
+        except KeyError:
             style['times'] = []
         # ... and append it to the styles that the swimmer has swam
         swimmer['styles'].append(style)
@@ -106,6 +102,6 @@ class RecordsSpider(scrapy.Spider):
             yield response.follow(url, callback=self.parse_distances, meta={'swimmer': swimmer,
                                                                             'distances': distances})
         else:
-            # and finally if we really are done with the styles for this wimmer
+            # and finally if we really are done with the styles for this swimmer
             # we return a swimmer item. Exactly once per every swimmer.
             yield swimmer
