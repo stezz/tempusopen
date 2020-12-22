@@ -21,15 +21,18 @@ class RecordsSpider(scrapy.Spider):
         # all the swimmers of the site and if we have multiple results
         # we only .get() the first one
         urls = [base_url.format_map(x) for x in swimmers]
-        for url in urls:
-            yield scrapy.Request(url=url, callback=self.parse)
+
+        if urls:
+            for url in urls:
+                yield scrapy.Request(url=url, callback=self.parse)
 
     def parse(self, response):
         # For each swimmer we find in the search results we get his/her URL and...
         swimmer_url = response.xpath('//table//tbody/tr/td/a[@class="view"]/@href').get()
         swimmer = Swimmer()
+        if swimmer_url:
         # ... we fire a request to parse the records
-        yield response.follow(swimmer_url, callback=self.parse_records, meta={'swimmer': swimmer})
+            yield response.follow(swimmer_url, callback=self.parse_records, meta={'swimmer': swimmer})
 
     def parse_records(self, response):
         # now we are on a page that has the swimmer data, as you can see below
