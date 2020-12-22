@@ -1,6 +1,7 @@
 import scrapy
 from tempusopen.settings import swimmers
 from tempusopen.items import Swimmer, Time, Style
+# from tempusopen.items import SwimmerLoader, TimeLoader, StyleLoader
 
 
 class BaseUrl(scrapy.Item):
