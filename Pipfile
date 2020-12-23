@@ -5,6 +5,7 @@ name = "pypi"
 
 [packages]
 scrapy = "*"
+pytablewriter = {extras = ["excel"], version = "*"}
 
 [dev-packages]
 

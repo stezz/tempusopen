@@ -14,6 +14,7 @@ class Swimmer(scrapy.Item):
     status = scrapy.Field()
     license = scrapy.Field()
     styles = scrapy.Field()
+    gender = scrapy.Field()
 
 class Style(scrapy.Item):
     name = scrapy.Field()
