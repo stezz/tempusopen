@@ -29,7 +29,9 @@ class RecordsSpider(scrapy.Spider):
     def parse(self, response):
         # For each swimmer we find in the search results we get his/her URL and...
         swimmer_url = response.xpath('//table//tbody/tr/td/a[@class="view"]/@href').get()
+        swimmer_gender = response.xpath('//table//tbody/tr/td[6]/text()').get()
         swimmer = Swimmer()
+        swimmer['gender'] = swimmer_gender
         if swimmer_url:
         # ... we fire a request to parse the records
             yield response.follow(swimmer_url, callback=self.parse_records, meta={'swimmer': swimmer})
