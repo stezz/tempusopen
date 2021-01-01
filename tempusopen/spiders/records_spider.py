@@ -14,7 +14,7 @@ class RecordsSpider(scrapy.Spider):
     def start_requests(self):
         base_url = ('https://www.tempusopen.fi/index.php?r=swimmer/index&Swimmer[first_name]={firstname}&'
                     'Swimmer[last_name]={lastname}&Swimmer[searchChoice]=1&Swimmer[swimmer_club]={team}&'
-                    'Swimmer[class]=1&Swimmer[is_active]=1')
+                    'Swimmer[class]=99&Swimmer[is_active]=1')
         # swimmers is a dictionary that contains the {'name', 'surname', 'team'}
         # of the swimmers we want to crawl.
         # At the moment we need to give exact names since we search for the swimmer among
