@@ -14,15 +14,17 @@ class RecordsSpider(scrapy.Spider):
     def start_requests(self):
         base_url = ('https://www.tempusopen.fi/index.php?r=swimmer/index&Swimmer[first_name]={firstname}&'
                     'Swimmer[last_name]={lastname}&Swimmer[searchChoice]=1&Swimmer[swimmer_club]={team}&'
-                    'Swimmer[class]=1&Swimmer[is_active]=1')
+                    'Swimmer[class]=99&Swimmer[is_active]=1')
         # swimmers is a dictionary that contains the {'name', 'surname', 'team'}
         # of the swimmers we want to crawl.
         # At the moment we need to give exact names since we search for the swimmer among
         # all the swimmers of the site and if we have multiple results
         # we only .get() the first one
         urls = [base_url.format_map(x) for x in swimmers]
-        for url in urls:
-            yield scrapy.Request(url=url, callback=self.parse)
+
+        if urls:
+            for url in urls:
+                yield scrapy.Request(url=url, callback=self.parse)
 
     def parse(self, response):
         # For each swimmer we find in the search results we get his/her URL and...
@@ -30,8 +32,9 @@ class RecordsSpider(scrapy.Spider):
         swimmer_gender = response.xpath('//table//tbody/tr/td[6]/text()').get()
         swimmer = Swimmer()
         swimmer['gender'] = swimmer_gender
+        if swimmer_url:
         # ... we fire a request to parse the records
-        yield response.follow(swimmer_url, callback=self.parse_records, meta={'swimmer': swimmer})
+            yield response.follow(swimmer_url, callback=self.parse_records, meta={'swimmer': swimmer})
 
     def parse_records(self, response):
         # now we are on a page that has the swimmer data, as you can see below
