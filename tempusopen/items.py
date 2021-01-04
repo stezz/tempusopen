@@ -18,9 +18,11 @@ class Swimmer(scrapy.Item):
 
 class Style(scrapy.Item):
     name = scrapy.Field()
-    #length = scrapy.Field()
+    # length = scrapy.Field()
     times = scrapy.Field()
-    #swimmer = scrapy.Field()
+    # TODO add best time for the swimmer
+    #  best = scrapy....
+    # swimmer = scrapy.Field()
 
 class Time(scrapy.Item):
     date = scrapy.Field()

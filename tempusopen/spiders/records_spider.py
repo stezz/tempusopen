@@ -94,6 +94,10 @@ class RecordsSpider(scrapy.Spider):
             t['competition'] = tr.xpath("./td[5]/text()").extract_first()
             # and append this time to the list of times for the style
             style['times'].append(t)
+            # TODO
+            #  save the best time of all in style['best']
+            #  Hint: the best time is the first in the list of times
+            #  if no style['best'] then style['best'] = first time you find
         distances = response.meta['distances']
         # This is where the magic happens...
         if distances:
