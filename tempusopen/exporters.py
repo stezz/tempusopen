@@ -15,9 +15,20 @@ class XlsxItemExporter(BaseItemExporter):
         self.writer.format_table['cell']['font_size'] = 12
         self.writer.format_table['header']['font_name'] = 'Calibri'
         self.writer.format_table['header']['font_size'] = 12
-        headers = ['name', 'gender', 'born', 'team', 'style', 'date', 'time', 'competition', 'age']
+        headers = ['name', 'gender', 'born', 'team', 'style', 'date', 'time', 'FINA', 'competition', 'age']
         self.writer.headers = headers
         self.writer.table_name = 'Tempusopen'
+        self.data = []
+
+    def swimmers_list(self):
+        self.writer = ptw.ExcelXlsxTableWriter()
+        self.writer.format_table['cell']['font_name'] = 'Calibri'
+        self.writer.format_table['cell']['font_size'] = 12
+        self.writer.format_table['header']['font_name'] = 'Calibri'
+        self.writer.format_table['header']['font_size'] = 12
+        headers = ['name1', 'gender1', 'born1', 'team1', 'age1']
+        self.writer.headers = headers
+        self.writer.table_name = 'Swimmers*list'
         self.data = []
 
     def finish_exporting(self):
@@ -30,8 +41,9 @@ class XlsxItemExporter(BaseItemExporter):
             for time in style['times']:
                 print('this is time', time)
                 self.data.append([item['name'], item['gender'], item['born'],
-                             item['team'], style['name'], time['date'], time['time'],
-                             time['competition'],
-                             datetime.datetime.strptime(time['date'], '%Y-%m-%d').year
-                             - int(item['born'])])
-        
+                                  item['team'], style['name'], time['date'], time['time'], time['FINA'],
+                                  time['competition'],
+                                  datetime.datetime.strptime(time['date'], '%Y-%m-%d').year
+                                  - int(item['born'])])
+
+

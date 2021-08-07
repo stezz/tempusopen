@@ -23,10 +23,12 @@ class Style(scrapy.Item):
     # TODO add best time for the swimmer
     #  best = scrapy....
     # swimmer = scrapy.Field()
+    best = scrapy.Field()
 
 class Time(scrapy.Item):
     date = scrapy.Field()
     time = scrapy.Field()
     competition = scrapy.Field()
+    FINA = scrapy.Field()
     #style = scrapy.Field()
     #swimmer = scrapy.Field()

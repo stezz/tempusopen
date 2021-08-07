@@ -95,8 +95,13 @@ class RecordsSpider(scrapy.Spider):
             t['time'] = tr.xpath("./td[1]/text()").extract_first().strip("\n\xa0")
             t['date'] = tr.xpath("./td[4]/text()").extract_first()
             t['competition'] = tr.xpath("./td[5]/text()").extract_first()
+            t['FINA'] = tr.xpath("./td[2]/text()").extract_first()
             # and append this time to the list of times for the style
             style['times'].append(t)
+            try:
+                style['best']
+            except KeyError:
+                style['best'] = t
             # TODO
             #  save the best time of all in style['best']
             #  Hint: the best time is the first in the list of times
