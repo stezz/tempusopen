@@ -12,10 +12,27 @@ BOT_NAME = 'tempusopen'
 SPIDER_MODULES = ['tempusopen.spiders']
 NEWSPIDER_MODULE = 'tempusopen.spiders'
 
-swimmers = [
-    # Add here the list of swimmers you are interested in scraping
-    {'firstname': 'John', 'lastname': 'Doe', 'team': 'Celtics'},
-]
+ask = int(input("1=search by name, 2=presets: "))
+
+if ask == 1:
+
+    firstname1 = input("1:Name? ")
+    lastname1 = input("1:Lastname? ")
+    team1 = input("1:Team? ")
+    firstname2 = input("2:Name? ")
+    lastname2 = input("2:Lastname? ")
+    team2 = input("2:Team? ")
+    swimmers = [
+        # Add here the list of swimmers you are interested in scraping
+        dict(firstname=firstname1, lastname=lastname1, team=team1),
+        dict(firstname=firstname2, lastname=lastname2, team=team2),
+    ]
+else:
+    swimmers = [
+        # Add here the list of swimmers you are interested in scraping
+        {'firstname': 'John', 'lastname': 'Doe', 'team': 'Celtics'},
+    ]
+
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
